@@ -14,12 +14,13 @@ const trivialSurvial = {
     }
   ],
 
-  gametype: ["Standard", "Blitz", "Siphon", "Smokes and Mirrors"], 
   inPlay: null,
   lettersGuessed: [],
   lettersAnswer: [],
   attempts: 0,
   score: 0,
+
+  selectGamemode: function() {},
 
   initialSetupGame: function() {
     const objKeys = Object.keys(this.questionBank)
@@ -45,10 +46,11 @@ const trivialSurvial = {
     console.log("reset function")
   },
 
-  rebuildWordView: function () {},
-  updateAttempts: function () {},
-  updateMatchedLetters: function () {},
+  rebuildWordView: function() {},
+  updateAttempts: function() {},
+  updateMatchedLetters: function() {},
+
 }
 trivialSurvial.initialSetupGame()
-
+trivialSurvial.selectGamemode()
 // Interact with page
