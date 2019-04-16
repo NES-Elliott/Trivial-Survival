@@ -20,19 +20,42 @@ const trivialSurvial = {
   attempts: 0,
   score: 0,
 
+  selectGamemode: function() {
+    const app = this
+    $("#startButton").click(function() {
+      app.setupGame($("#gamemodeSelect")[0].value)
+    })
+  },
   setupGame: function(gamemode) {
     if (gamemode === "standard") {
       const objKeys = Object.keys(this.questionBank)
       this.inPlay = this.questionBank[Math.floor(Math.random() * objKeys.length)]
-      console.log(this.inPlay)
-      this.lettersAnswer = this.inPlay.answer.toLowerCase().split("") 
-      console.log(this.lettersAnswer)
-      // function to turn the answer into blanks
-      // render UI
+      this.lettersAnswer = this.inPlay.answer.toLowerCase().split("")
+      this.setupUI(gamemode)
     } else {
       console.log("Not Available: Blitz, Siphon, Smoke and Mirrors")
     }
   },
+  setupUI: function(gamemode) {
+    $("#mainHeader").html("Trivial Survival") // change header
+    $("#questionBox").html(this.inPlay.question) // change question box text to question
+    // answer box
+    $("#answerBox").html("")
+    if (gamemode === "standard") {
+      // clear the answerBox
+      // run a function
+      this.buildWordView()
+    }
+  },
+  buildWordView: function() {
+    let wordView = ""
+    for (var i = 0; i < this.lettersAnswer.length; i++) {
+      wordView += this.lettersAnswer[i]
+    }
+    console.log(wordView)
+    console.log("&nbsp;_&nbsp;")
+  },
+
 
   updatePage: function(letter) {
     if (this.attempts === 0) {
@@ -48,15 +71,9 @@ const trivialSurvial = {
     console.log("reset function")
   },
 
-  rebuildWordView: function() {},
   updateAttempts: function() {},
-  updateMatchedLetters: function() {},
-  selectGamemode: function() {
-    const app = this
-    $("#startButton").click(function() {
-      app.setupGame($("#gamemodeSelect")[0].value)
-    })
-  }
+  updateMatchedLetters: function() {}
+  // function that updates page for game start
 }
 trivialSurvial.selectGamemode()
 // Interact with page
