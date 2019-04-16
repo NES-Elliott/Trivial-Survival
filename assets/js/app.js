@@ -20,16 +20,18 @@ const trivialSurvial = {
   attempts: 0,
   score: 0,
 
-  selectGamemode: function() {},
-
-  initialSetupGame: function() {
-    const objKeys = Object.keys(this.questionBank)
-    this.inPlay = this.questionBank[Math.floor(Math.random() * objKeys.length)]
-    console.log(this.inPlay)
-    this.lettersAnswer = this.inPlay.answer.toLowerCase().split("") 
-    console.log(this.lettersAnswer)
-    // function to turn the answer into blanks
-    // render UI
+  setupGame: function(gamemode) {
+    if (gamemode === "standard") {
+      const objKeys = Object.keys(this.questionBank)
+      this.inPlay = this.questionBank[Math.floor(Math.random() * objKeys.length)]
+      console.log(this.inPlay)
+      this.lettersAnswer = this.inPlay.answer.toLowerCase().split("") 
+      console.log(this.lettersAnswer)
+      // function to turn the answer into blanks
+      // render UI
+    } else {
+      console.log("Not Available: Blitz, Siphon, Smoke and Mirrors")
+    }
   },
 
   updatePage: function(letter) {
@@ -49,8 +51,12 @@ const trivialSurvial = {
   rebuildWordView: function() {},
   updateAttempts: function() {},
   updateMatchedLetters: function() {},
-
+  selectGamemode: function() {
+    const app = this
+    $("#startButton").click(function() {
+      app.setupGame($("#gamemodeSelect")[0].value)
+    })
+  }
 }
-trivialSurvial.initialSetupGame()
 trivialSurvial.selectGamemode()
 // Interact with page
