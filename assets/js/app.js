@@ -1,4 +1,3 @@
-// Logic of app
 const trivialSurvial = {
   questionBank: [
     {
@@ -14,23 +13,42 @@ const trivialSurvial = {
     answer: "Tinkerbell"
     }
   ],
-  // Variables
+
+  gametype: ["Standard", "Blitz", "Siphon", "Smokes and Mirrors"], 
   inPlay: null,
   lettersGuessed: [],
   lettersAnswer: [],
   attempts: 0,
   score: 0,
 
-  setupGame: function() {
+  initialSetupGame: function() {
     const objKeys = Object.keys(this.questionBank)
     this.inPlay = this.questionBank[Math.floor(Math.random() * objKeys.length)]
     console.log(this.inPlay)
-    this.lettersAnswer = this.inPlay.answer.split("")
+    this.lettersAnswer = this.inPlay.answer.toLowerCase().split("") 
     console.log(this.lettersAnswer)
     // function to turn the answer into blanks
     // render UI
-  }
+  },
+
+  updatePage: function(letter) {
+    if (this.attempts === 0) {
+      // this.resetGame()
+    } else {
+      // this.updateAttempts(letter)
+      // this.updateMatchedLetters(letter)
+      // update blank spaces
+    }
+  },
+
+  resetGame: function() {
+    console.log("reset function")
+  },
+
+  rebuildWordView: function () {},
+  updateAttempts: function () {},
+  updateMatchedLetters: function () {},
 }
-trivialSurvial.setupGame()
+trivialSurvial.initialSetupGame()
 
 // Interact with page
